@@ -32,22 +32,9 @@ include(__DIR__ . "/app/template/navbar.php");
     <div class="row align-items-start">
         <div class="col">
             <ul id=announced_dates>
-                <?php foreach ($appointment_storage->findAllActualMonth((int)date('m', strtotime('-1 months'))) as $appointment) : ?>
-                    <li class="<?= $appointment['users']==="" ? "text-success" : "text-danger" ?>"><?= date("Y.m.d H:i", $appointment['time']) ?></li>
-                <?php endforeach ?>
-            </ul>
-        </div>
-        <div class="col">
-            <ul id=announced_dates>
                 <?php foreach ($appointment_storage->findAllActualMonth((int)date('m')) as $appointment) : ?>
-                    <li class="<?= $appointment['users']==="" ? "text-success" : "text-danger" ?>"><?= date("Y.m.d H:i", $appointment['time']) ?></li>
-                <?php endforeach ?>
-            </ul>
-        </div>
-        <div class="col">
-            <ul id=announced_dates>
-                <?php foreach ($appointment_storage->findAllActualMonth((int)date('m', strtotime('+1 months'))) as $appointment) : ?>
-                    <li class="<?= $appointment['users']==="" ? "text-success" : "text-danger" ?>"><?= date("Y.m.d H:i", $appointment['time']) ?></li>
+                    <li class="<?= count($appointment['users'])<(int)$appointment['free'] ? "text-success" : "text-danger" ?>"><?= date("Y.m.d H:i", $appointment['time']) ?>
+                        <?= count($appointment['users']) ?>\<?= $appointment['free'] ?> szabad hely</li>
                 <?php endforeach ?>
             </ul>
         </div>
