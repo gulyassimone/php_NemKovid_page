@@ -38,8 +38,7 @@ class Auth
     public function authenticate($email, $password)
     {
         $users = $this->user_storage->findMany(function ($user) use ($email, $password) {
-            return $user["email"] === $email &&
-                password_verify($password, $user["password"]);
+            return $user["email"] === $email && $password ===$user["password"];
         });
         return count($users) === 1 ? array_shift($users) : NULL;
     }
