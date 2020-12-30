@@ -1,0 +1,24 @@
+{
+    "5fec6807f210b": {
+        "name": "Guly\u00e1s Simone",
+        "taj": "123456789",
+        "address": "Hossz\u00fa utca 97",
+        "email": "gulyassimone@gmail.com",
+        "password": "123",
+        "roles": [
+            "user"
+        ],
+        "id": "5fec6807f210b"
+    },
+    "1": {
+        "name": "Guly\u00e1s Simone",
+        "taj": "123456789",
+        "address": "Hossz\u00fa utca 97",
+        "email": "admin",
+        "password": "123",
+        "roles": [
+            "admin"
+        ],
+        "id": "1"
+    }
+}
