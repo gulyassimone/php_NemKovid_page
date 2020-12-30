@@ -4,6 +4,7 @@ include(__DIR__ . '/app/lib/auth.php');
 include(__DIR__ . '/app/lib/helper.php');
 
 
+
 $appointment_storage = new AppointmentStorage();
 $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 
@@ -58,7 +59,7 @@ include(__DIR__ . "/app/template/navbar.php");
                     <?= $user ?>,
                     <?php endforeach ?>
                 </td>
-                <td><button type="button" id="apply" class="btn btn-info">Jelentkezés</button></td>
+                <td><a id="apply" class="btn btn-info" href="book_an_appointment.php?appointment_id=<?=$appointment['id']?>">Jelentkezés</a></td>
                 </div>
             </tr>
         <?php endforeach ?>
@@ -72,11 +73,5 @@ include(__DIR__ . "/app/template/navbar.php");
 <?php
 include(__DIR__ . "/app/template/footer.php");
 ?>
-<script>
-    incrementButton = document.querySelector("#incrementMonth");
-    decrementButton = document.querySelector("#decrementMonth");
-    incrementButton.addEventListener("click", function () {
-    })
-</script>
 </body>
 </html>

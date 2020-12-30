@@ -2,7 +2,9 @@
 include(__DIR__ . '/app/storages/userstorage.php');
 include(__DIR__ . '/app/lib/auth.php');
 include(__DIR__ . '/app/lib/helper.php');
+include(__DIR__ . '/app/storages/appointmentstorage.php');
 
+$appointment_storage = new AppointmentStorage();
 
 function validate($post, &$data, &$errors)
 {
@@ -27,18 +29,25 @@ function validate($post, &$data, &$errors)
 session_start();
 $user_storage = new UserStorage();
 $auth = new Auth($user_storage);
+
 $data = [];
 $errors = [];
+
+
 if ($_POST) {
     if (validate($_POST, $data, $errors)) {
         $auth_user = $auth->authenticate($data['email'], $data['password']);
         print_r("auth_user ");
-        print_r($auth_user );
+        print_r($auth_user);
         if (!$auth_user) {
             $errors['global'] = "Nem megfelelő felhasználónév vagy jelszó";
         } else {
             $auth->login($auth_user);
-            redirect('index.php');
+            if (isset($_GET['appointment_id'])) {
+                redirect('book_an_appointment.php?appointment_id='.$_GET['appointment_id']);
+            } else {
+                redirect('index.php');
+            }
         }
     }
 }
