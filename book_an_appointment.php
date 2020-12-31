@@ -24,28 +24,28 @@ if (!$auth->is_authenticated()) {
 $user = $auth->authenticated_user();
 $appointment = $appointment_storage->findById($appointment_id);
 
+$actualUserBooking = $bookingStorage->findOne(["user_id" => $user["id"]]) ?? [];
+$actualAppBooking = $bookingStorage->findMany(function ($booking) use ($appointment_id) {
+        return $booking["appointment_id"] === $appointment_id;
+    }) ?? [];
 
-function validate($get, $bookingStorage, $user, $appointment_id, $appointment,&$errors)
+
+function validate($get, $appointment, &$errors, $actualUserBooking, $actualAppBooking): bool
 {
-    $actualUserBooking = $bookingStorage->findOne(["user_id" => $user["id"]]) ?? [];
-    $actualAppBooking = $bookingStorage->findAll(["appointment_id" => $appointment_id]) ?? [];
-
-
-
     if (!isset($get['admit'])) {
         $errors['admit'] = "Az általános szerződési feltételek nincs elfogadva.";
     }
-    if (count($actualUserBooking)>0) {
-        $errors["booking"]="Már van foglalásod!";
+    if (count($actualUserBooking) > 0) {
+        $errors["booking"] = "Már van foglalásod!";
     }
-    if ($appointment["free"] <= count($actualAppBooking) ) {
-        $errors["global"]="Beteltek a helyek.";
+    if ($appointment["free"] <= count($actualAppBooking)) {
+        $errors["global"] = "Beteltek a helyek.";
     }
 
     return count($errors) === 0;
 }
 
-if (validate($_GET, $bookingStorage, $user, $appointment_id,$appointment, $errors)) {
+if (validate($_GET, $appointment, $errors, $actualUserBooking, $actualAppBooking)) {
     print_r($errors);
     $data['appointment_id'] = $appointment_id;
     $data['user_id'] = $user['id'];
@@ -70,13 +70,13 @@ if (validate($_GET, $bookingStorage, $user, $appointment_id,$appointment, $error
 include(__DIR__ . "/app/template/navbar.php");
 ?>
 <div class="container">
-    <?php if(count($errors)>0) : ?>
-    <ul class="text-danger">
-    <?php foreach ($errors as $error) :?>
-        <li><?=$error ?></li>
-    <?php endforeach; ?>
+    <?php if (count($errors) > 0) : ?>
+        <ul class="text-danger">
+            <?php foreach ($errors as $error) : ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
         </ul>
-    <?php endif;?>
+    <?php endif; ?>
     <form action="" method="get" novalidate>
         <div class="row justify-content-start">
             <div class="inline-block">
@@ -93,6 +93,17 @@ include(__DIR__ . "/app/template/navbar.php");
         </div>
         <button type="submit" class="btn btn-primary"> Megerősít</button>
     </form>
+    <?php if ($auth->authorize(["admin"])) : ?>
+        <h3>Jelentkezett felhasználók:</h3>
+        <ul>
+            <?php foreach ($actualAppBooking as $booking) :
+                $booking_person = $userStorage->findById($booking['user_id']);
+                ?>
+                <li> név: <?= $booking_person["name"]?> taj: <?= $booking_person["taj"]?>  email: <?= $booking_person["email"]?></li>
+            <?php endforeach ?>
+        </ul>
+    <?php endif; ?>
+
 </div>
 
 <?php

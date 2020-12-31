@@ -57,7 +57,7 @@
       <workItem from="1609316449996" duration="24975000" />
       <workItem from="1609343570503" duration="975000" />
       <workItem from="1609344883131" duration="21859000" />
-      <workItem from="1609400917908" duration="6783000" />
+      <workItem from="1609400917908" duration="8438000" />
     </task>
     <servers />
   </component>
@@ -128,7 +128,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/book_an_appointment.php</url>
-          <line>10</line>
+          <line>9</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

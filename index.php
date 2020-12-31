@@ -74,7 +74,7 @@ include(__DIR__ . "/app/template/navbar.php");
             <td><?= count($bookingsByApp) ?>\<?= $appointment['free'] ?> szabad hely</td>
 
             <td>
-                <?php if (count($bookingsByApp) < (int)$appointment['free'] && (!$auth->is_authenticated() || empty($bookingsByUser))) : ?>
+                <?php if ($auth->authorize(["admin"]) || count($bookingsByApp) < (int)$appointment['free'] && (!$auth->is_authenticated() || empty($bookingsByUser))) : ?>
                     <a id="apply" class="btn btn-info"
                        href="book_an_appointment.php?appointment_id=<?= $appointment['id'] ?>">Jelentkezés</a>
                 <?php elseif ($auth->is_authenticated() && $bookingsByUser['appointment_id'] === $appointment['id']) : ?>
