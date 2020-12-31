@@ -20,5 +20,16 @@
             "admin"
         ],
         "id": "1"
+    },
+    "5feda48b28cac": {
+        "name": "Erzsi",
+        "taj": "987654321",
+        "address": "valami",
+        "email": "erzsi@gmail.com",
+        "password": "123",
+        "roles": [
+            "user"
+        ],
+        "id": "5feda48b28cac"
     }
 }

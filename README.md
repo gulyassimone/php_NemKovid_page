@@ -47,6 +47,6 @@ Az alap feladatok (14 pont)
 Plusz feladatok (plusz 5 pont)
 
 [ ] Listaoldal: időpontok naptár formátumban (2,5 pont)
-[ ] Listaoldal: AJAX naptár lapozás (1 pont)
+[x] Listaoldal: AJAX naptár lapozás (1 pont)
 [x] Bejelentkezés: megőrzi a kiválasztott időpontot (1 pont)
 [x] Űrlapok: a regisztrációs és az új időpont űrlapon a hibaüzeneteket az űrlapmezők mellett jelennek meg (0,5 pont)
