@@ -13,4 +13,5 @@ class AppointmentStorage extends Storage
            return (int)date('m', $date['time']) === $actual;
            });
     }
+
 }

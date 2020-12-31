@@ -1,16 +1,12 @@
 {
-    "5feca5a3dd793": {
-        "time": 1608221160,
+    "5fed865d1274c": {
+        "time": 1609401900,
         "free": 2,
-        "users": [
-            1
-        ],
-        "id": "5feca5a3dd793"
+        "id": "5fed865d1274c"
     },
-    "5fecb8c8ae580": {
-        "time": 1612027680,
+    "5fed8662aef3d": {
+        "time": 1608969900,
         "free": 2,
-        "users": [],
-        "id": "5fecb8c8ae580"
+        "id": "5fed8662aef3d"
     }
 }

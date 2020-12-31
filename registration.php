@@ -75,7 +75,6 @@ function validate($post, &$data, &$errors): bool
     } else if ($post['password_confirmation'] !== $data['password']) {
         $errors['password_confirmation'] = "Nem egyezik a megadott jelszóval";
     }
-
     return count($errors) === 0;
 }
 

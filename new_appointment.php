@@ -1,17 +1,24 @@
 <?php
 include(__DIR__ . '/app/storages/appointmentstorage.php');
+include(__DIR__ . '/app/storages/userstorage.php');
 include(__DIR__ . '/app/lib/auth.php');
 include(__DIR__ . '/app/lib/helper.php');
-
+session_start();
+$userStorage = new UserStorage();
+$auth = new Auth($userStorage);
 $appointment_storage = new AppointmentStorage();
 $errors = [];
 $data = [];
-print_r($_GET);
+
+if (!$auth->authorize(["admin"])) {
+
+    redirect('index.php');
+}
+
 
 if (count($_GET) > 0) {
 
     if (validate($_GET, $data,$errors)) {
-        $data["users"] = [];
         $appointment_storage->add($data);
         redirect('new_appointment.php');
     }
